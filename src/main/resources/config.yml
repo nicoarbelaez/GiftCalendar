@@ -1,0 +1,64 @@
+Config:
+  inventoryTitle: "&6&lCalendario &e%day%&r/&e%day:last% &l%month%"
+
+Rewards:
+  1:
+    - "give %player% apple %day%"
+  2:
+    - "give %player% apple %day%"
+  3:
+    - "give %player% emerald %day%"
+  4:
+    - "give %player% diamond %day%"
+  5:
+    - "give %player% diamond %day%"
+  6:
+    - "give %player% diamond %day%"
+  7:
+    - "give %player% diamond %day%"
+  8:
+    - "give %player% diamond %day%"
+  9:
+    - "give %player% diamond %day%"
+  10:
+    - "give %player% diamond %day%"
+  11:
+    - "give %player% apple %day%"
+  12:
+    - "give %player% apple %day%"
+  13:
+    - "give %player% emerald %day%"
+  14:
+    - "give %player% diamond %day%"
+  15:
+    - "give %player% diamond %day%"
+  16:
+    - "give %player% diamond %day%"
+  17:
+    - "give %player% diamond %day%"
+  18:
+    - "give %player% diamond %day%"
+  19:
+    - "give %player% diamond %day%"
+  20:
+    - "give %player% diamond %day%"
+  21:
+    - "give %player% apple %day%"
+  22:
+    - "give %player% apple %day%"
+  23:
+    - "give %player% emerald %day%"
+  24:
+    - "give %player% diamond %day%"
+  25:
+    - "give %player% diamond %day%"
+  26:
+    - "give %player% diamond %day%"
+  27:
+    - "give %player% diamond %day%"
+  28:
+    - "give %player% diamond %day%"
+  29:
+    - "give %player% diamond %day%"
+  30:
+    - "give %player% diamond %day%"

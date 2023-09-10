@@ -1,0 +1,42 @@
+Items:
+  next_gift:
+    # item material when shown. You can see all the materials here.
+    # NOTE: The materials change according to the server version.
+    # Server version <1.13 (Ex: SKULL_ITEM:3): https://hub.spigotmc.org/nexus/service/local/repositories/snapshots/archive/org/spigotmc/spigot-api/1.8.8-R0.1-SNAPSHOT/spigot-api-1.8.8-R0.1-20160221.082514-43-javadoc.jar/!/org/bukkit/Material.html
+    # Server version >=1.13 (Ex: PLAYER_HEAD): https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
+    material: SKULL_ITEM:3
+    # If the material is a skull head, add the texture value. You can get head textures here. https://minecraft-heads.com/custom-heads
+    value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTM3NTA2MWQwOGYxZDdiMzE3Njc1YWE3ZmE4ODAwZDZmMjA2NmUwMThkOWY5MWVjZGRmOWNhZjMwNGU5N2U5MiJ9fX0=
+    glow: false
+    name: "&fDaily Gift &c%day%"
+    lore:
+      - " "
+      - "&7Status: &c&lLOCKED"
+      - "&7Claim on &c%day%"
+  available_gift:
+    material: DIAMOND
+    value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTcyNmQ5ZDA2MzJlNDBiZGE1YmNmNjU4MzliYTJjYzk4YTg3YmQ2MTljNTNhZGYwMDMxMGQ2ZmM3MWYwNDJiNSJ9fX0=
+    glow: false
+    name: "&fDaily Gift &a%day%"
+    lore:
+      - " "
+      - "&7Status: &a&lAVAILABLE"
+      - "&7Claim on &a%day%"
+  claimed_gift:
+    material: EMERALD
+    value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODFlNDJlMzcyNWMyYjRhZTY5MDA1ODBjNGUyYTZiODMwZjZlY2EwMjExZjdhMzY0MTQzM2ZjNjdmYmM0M2QzZiJ9fX0=
+    glow: true
+    name: "&fDaily Gift &e%day%"
+    lore:
+      - " "
+      - "&7Status: &e&lCLAIMED"
+      - "&7Claim on &e%day%"
+  lost_gift:
+    material: BARRIER
+    value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjA2YTNkZTJiMWI5NWY0MmZmZDQ0ODAxOGQxY2MxMWRjNzYzZjlkNWM3MjJjYzFiNmNjM2ZjZmQ0ZjA5MDg5ZSJ9fX0=
+    glow: false
+    name: "&fDaily Gift &4%day%"
+    lore:
+      - " "
+      - "&7Status: &4&lLOST"
+      - "&7Claim on &4%day%"

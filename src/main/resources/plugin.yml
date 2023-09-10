@@ -1,0 +1,12 @@
+main: gc.nicoarbelaez.GiftCalendar
+version: ${project.version}
+name: ${project.name}
+author: nicoarbelaez
+api-version: "1.13"
+softdepend: [Vault]
+depend: [NBTAPI]
+
+commands:
+  calendar:
+    description: Main command GiftCalendar
+    aliases: gc
