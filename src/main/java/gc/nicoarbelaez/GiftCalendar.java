@@ -1,88 +1,90 @@
 package gc.nicoarbelaez;
 
-import gc.nicoarbelaez.commands.MainCommand;
-import gc.nicoarbelaez.configs.ItemConfig;
-import gc.nicoarbelaez.configs.MainConfig;
-import gc.nicoarbelaez.configs.MessageConfig;
-import gc.nicoarbelaez.configs.PlayerConfig;
-import gc.nicoarbelaez.listeners.InventoryListener;
-import gc.nicoarbelaez.managers.CustomItemManager;
-import gc.nicoarbelaez.managers.InventoryManager;
-import gc.nicoarbelaez.managers.PlayerManager;
-import gc.nicoarbelaez.managers.RewardsManager;
-
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class GiftCalendar extends JavaPlugin {
-    public static String PLUGIN_NAME;
-    public static String PLUGIN_VERSION;
+import gc.nicoarbelaez.commands.MainCommand;
+import gc.nicoarbelaez.configs.MainConfig;
+import gc.nicoarbelaez.configs.MessageConfig;
+import gc.nicoarbelaez.configs.PlayerConfig;
+import gc.nicoarbelaez.configs.calendar.CalendarConfig;
+import gc.nicoarbelaez.listeners.InventoryListener;
+import gc.nicoarbelaez.listeners.NotifyListen;
+import gc.nicoarbelaez.managers.CalendarInventoryManager;
+import gc.nicoarbelaez.managers.ItemManager;
+import gc.nicoarbelaez.managers.PlayerManager;
+import gc.nicoarbelaez.managers.RewardsManager;
 
-    private ItemConfig itemConfig;
+public class GiftCalendar extends JavaPlugin {
     private MainConfig mainConfig;
     private PlayerConfig playerConfig;
     private MessageConfig messageConfig;
+    private CalendarConfig calendarConfig;
 
-    private CustomItemManager customItemManager;
-    private InventoryManager inventoryManager;
+    private ItemManager itemManager;
+    private CalendarInventoryManager calendarInventoryManager;
     private PlayerManager playerManager;
     private RewardsManager rewardsManager;
 
     @Override
     public void onEnable() {
-        PLUGIN_NAME = this.getName();
-        PLUGIN_VERSION = this.getDescription().getVersion();
-
-        this.itemConfig = new ItemConfig(this);
-        this.mainConfig = new MainConfig(this);
-        this.playerConfig = new PlayerConfig(this);
-        this.messageConfig = new MessageConfig(this);
-
-        this.customItemManager = new CustomItemManager(this);
-        this.inventoryManager = new InventoryManager(this);
-        this.playerManager = new PlayerManager(this);
-        this.rewardsManager = new RewardsManager(this);
-
-        this.itemConfig.load();
-        this.mainConfig.load();
-        this.playerConfig.load();
-        this.messageConfig.load();
-
-        this.getLogger().info(
-                GiftCalendar.PLUGIN_NAME + " v" + GiftCalendar.PLUGIN_VERSION + " se esta ejecutando en el servidor.");
-
-        registerComamnd();
+        String str = "";
+        for (int i = 0; i < 100; i++) {
+            str += "=";
+        }
+        System.out.print(str); // TODO: Remove
+        // Load configurations and register commands/events when enabling the plugin
+        loadConfigs();
+        initializeManagers();
+        registerCommands();
         registerListeners();
+        getLogger().info(getName() + " v" + getDescription().getVersion() + " is running.");
+        System.out.print(str); // TODO: Remove
     }
 
     @Override
     public void onDisable() {
+        // Save configurations and display a disable message when disabling the plugin
         playerConfig.save();
-        this.getLogger().info("Gracias por usar el plugin.");
+        getLogger().info("Thank you for using the plugin.");
     }
 
-    /**
-     * Register the events of the plugin
-     */
-    public void registerListeners() {
+    private void loadConfigs() {
+        // Load plugin configurations from files
+        mainConfig = new MainConfig(this);
+        playerConfig = new PlayerConfig(this);
+        messageConfig = new MessageConfig(this);
+        calendarConfig = new CalendarConfig(this);
+
+        mainConfig.load();
+        playerConfig.load();
+        messageConfig.load();
+        calendarConfig.load();
+    }
+
+    private void initializeManagers() {
+        // Initialize plugin object managers
+        itemManager = new ItemManager(this);
+        calendarInventoryManager = new CalendarInventoryManager(this);
+        playerManager = new PlayerManager(this);
+        rewardsManager = new RewardsManager(this);
+    }
+
+    private void registerCommands() {
+        // Register the main plugin command
+        MainCommand mainCommand = new MainCommand(this);
+        getCommand("giftcalendar").setExecutor(mainCommand);
+    }
+
+    private void registerListeners() {
+        // Register event listeners
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new InventoryListener(this), this);
-    }
-
-    /**
-     * Register the command of the plugin
-     */
-    public void registerComamnd() {
-        MainCommand mainCommand = new MainCommand(this);
-        this.getCommand("calendar").setExecutor(mainCommand);
+        pm.registerEvents(new NotifyListen(this), this);
     }
 
     public MainConfig getMainConfig() {
         return mainConfig;
-    }
-
-    public ItemConfig getItemConfig() {
-        return itemConfig;
     }
 
     public PlayerConfig getPlayerConfig() {
@@ -93,12 +95,16 @@ public class GiftCalendar extends JavaPlugin {
         return messageConfig;
     }
 
-    public CustomItemManager getCustomItemManager() {
-        return customItemManager;
+    public CalendarConfig getCalendarConfig() {
+        return calendarConfig;
     }
 
-    public InventoryManager getInventoryManager() {
-        return inventoryManager;
+    public ItemManager getItemManager() {
+        return itemManager;
+    }
+
+    public CalendarInventoryManager getCalendarInventoryManager() {
+        return calendarInventoryManager;
     }
 
     public PlayerManager getPlayerManager() {

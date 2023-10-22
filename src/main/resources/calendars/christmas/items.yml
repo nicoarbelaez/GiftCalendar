@@ -1,0 +1,141 @@
+############################################################
+# +------------------------------------------------------+ #
+# |                     GiftCalendar                     | #
+# +------------------------------------------------------+ #
+# |                                                      | #
+# | Este es el archivo items.yml. Aquí se encuentra      | #
+# | toda la configuración relacionada con los items.     | #
+# | Esta configuración solo funcionará para el calendario| #
+# | en el que se encuentra.                              | #
+# |                                                      | #
+# | ¿Cómo usar?                                          | #
+# | 1. Define los items para mostrar el estado de cada   | #
+# |    día y para navegar en el calendario.              | #
+# | 2. Agrega items extras para decorar el panel o       | #
+# |    proporcionar elementos únicos.                    | #
+# | 3. ¡Personaliza tu calendario de regalos a medida!   | #
+# |                                                      | #
+############################################################
+
+# Este es el archivo de configuración para GiftCalendar v2.0.
+# Asegúrate de seguir las instrucciones en los comentarios para una configuración correcta.
+
+# Si necesitas ayuda con GiftCalendar, visita nuestro sitio web en https://discord.com/invite/FmaRPpcx7f
+
+############################################################
+# +------------------------------------------------------+ #
+# |                 Items de calendario                  | #
+# +------------------------------------------------------+ #
+############################################################
+
+# Items definidos para mostrar el estado de cada día y/o los items para moverse en el panel.
+items:
+  next_gift:
+    # Material del item cuando se muestra.
+    # NOTA: Los materiales cambian según la versión del servidor.
+    # Versión del servidor <1.13 (Ej: SKULL_ITEM:3):
+    # https://hub.spigotmc.org/nexus/service/local/repositories/snapshots/archive/org/spigotmc/spigot-api/1.8.8-R0.1-SNAPSHOT/spigot-api-1.8.8-R0.1-20160221.082514-43-javadoc.jar/!/org/bukkit/Material.html
+    # Versión del servidor >=1.13 (Ex: PLAYER_HEAD):
+    # https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
+    material: SKULL_ITEM:3
+    # Si el material es una cabeza de calavera, agrega el valor de la textura. Obtén texturas de cabeza en https://minecraft-heads.com/custom-heads
+    value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWQ5N2Y0ZjQ0ZTc5NmY3OWNhNDMwOTdmYWE3YjRmZTkxYzQ0NWM3NmU1YzI2YTVhZDc5NGY1ZTQ3OTgzNyJ9fX0=
+    glow: false
+    name: "&fRegalo Diario &c%day%"
+    lore:
+      - " "
+      - "&7Estado: &c&lBLOQUEADO"
+      - "&7Reclama el día &c%day%"
+  available-gift:
+    material: DIAMOND
+    name: "&fRegalo Diario &a%day%"
+    lore:
+      - " "
+      - "&7Estado: &a&lDISPONIBLE"
+      - "&7Reclama el día &a%day%"
+  claimed-gift:
+    material: EMERALD
+    name: "&fRegalo Diario &e%day%"
+    lore:
+      - " "
+      - "&7Estado: &e&lRECLAMADO"
+      - "&7Reclama el día &e%day%"
+  lost-gift:
+    material: BARRIER
+    name: "&fRegalo Diario &4%day%"
+    lore:
+      - " "
+      - "&7Estado: &4&lPERDIDO"
+      - "&7Reclama el día &4%day%"
+  next-panel:
+    material: ARROW
+    name: "&e&lSIGUIENTE"
+    lore:
+      - " "
+      - "&7Haz clic para abrir el siguiente panel."
+    slot: 50
+  previous-panel:
+    material: ARROW
+    name: "&e&lANTERIOR"
+    lore:
+      - " "
+      - "&7Haz clic para abrir el panel anterior."
+    slot: 48
+  close:
+    material: BARRIER
+    name: "&c&lCERRAR"
+    lore:
+      - " "
+      - "&7Haz clic para cerrar el calendario."
+    slot: 49
+
+# Items extras que puedes usar como posible decoración o agregado al panel.
+custom-items:
+  custom_item_1:
+    material: SKULL_ITEM:3
+    owner: Notch
+    # Puedes comprobar la posición de las ranuras que puedes utilizar aquí: https://imgur.com/tdFGlt2.jpg
+    slot: 0
+    priority: 1
+    name: "&fCalavera &6&lPersonalizado"
+    lore:
+      - "&7Esto es una calavera"
+      - "&7personalizada."
+  custom_item_2:
+    material: STONE
+    slot: 8
+    priority: 1
+    name: "&fPiedra &6&lPersonalizado"
+    lore:
+      - "&7Esto es una piedra"
+      - "&7personalizada."
+      - "&fTe lleva al spawn."
+    commands:
+      - "[console] say ¡Hola mundo!"
+      - "[player] spawn"
+  custom_item_3:
+    material: ANVIL
+    name: "&e&lINFO"
+    slot: 4
+    priority: 1
+    lore:
+      - "&7Dia: &e%day%"
+      - "&7Días totales: &e%days%"
+      - "&7Pagina: &e%page%"
+      - "&7Paginas: &e%pages%"
+  custom_item_4:
+    glow: true
+    material: STAINED_GLASS_PANE:14
+    name: " "
+    slots:
+      - 0-8
+      - 18-26
+      - 36-44
+  custom_item_5:
+    glow: true
+    material: STAINED_GLASS_PANE:15
+    name: " "
+    slots:
+      - 9-17
+      - 27-35
+      - 45-53

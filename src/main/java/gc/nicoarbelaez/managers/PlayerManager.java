@@ -3,19 +3,22 @@ package gc.nicoarbelaez.managers;
 import gc.nicoarbelaez.GiftCalendar;
 import gc.nicoarbelaez.models.PlayerModel;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.bukkit.entity.Player;
 
 public class PlayerManager {
     private GiftCalendar plugin;
-    private List<PlayerModel> players;
 
     public PlayerManager(GiftCalendar plugin) {
         this.plugin = plugin;
-        this.players = plugin.getPlayerConfig().getPlayers();
     }
 
-    public PlayerModel getPlayerFromUUID(String uuid) {
-        for (PlayerModel player : players) {
+    public PlayerModel getPlayerModelFromUUID(String uuid) {
+        for (PlayerModel player : plugin.getPlayerConfig().getPlayers()) {
             if (player.getUuid().equals(uuid)) {
                 return player;
             }
@@ -23,44 +26,42 @@ public class PlayerManager {
         return null;
     }
 
-    public void addClaimedDay(String uuid, int day) {
-        PlayerModel player = getPlayerFromUUID(uuid);
+    public PlayerModel getPlayerModelFromPlayer(Player player){
+        return getPlayerModelFromUUID(player.getUniqueId().toString());
+    }
+
+    public void addClaimedDay(String uuid, String calendarName, int day) {
+        PlayerModel player = getPlayerModelFromUUID(uuid);
 
         if (player == null) {
+            Map<String, List<Integer>> calendarRewardsRegister = new HashMap<>();
             List<Integer> claimedDays = new ArrayList<>();
             claimedDays.add(day);
+            calendarRewardsRegister.put(calendarName, claimedDays);
 
-            players.add(new PlayerModel(uuid, claimedDays));
-            return;
+            Set<PlayerModel> players = plugin.getPlayerConfig().getPlayers();
+            players.add(new PlayerModel(uuid, calendarRewardsRegister));
+        } else {
+            Map<String, List<Integer>> calendarRewardsRegister = player.getCalendarRewardsRegister();
+            List<Integer> claimedDays = calendarRewardsRegister.get(calendarName);
+
+            if (claimedDays == null) {
+                claimedDays = new ArrayList<>();
+                calendarRewardsRegister.put(calendarName, claimedDays);
+            }
+
+            claimedDays.add(day);
+        }
+    }
+
+    public boolean hasClaimedDay(String uuid, String calendarName, int day) {
+        PlayerModel player = getPlayerModelFromUUID(uuid);
+
+        if (player == null) {
+            return false;
         }
 
-        player.getClaimedDays().add(day);
-        plugin.getPlayerConfig().save();
+        List<Integer> claimedDays = player.getCalendarRewardsRegister().get(calendarName);
+        return claimedDays != null && claimedDays.contains(day);
     }
-
-    public boolean hasClaimedDay(String uuid, int day) {
-        PlayerModel player = getPlayerFromUUID(uuid);
-
-        if (player == null)
-            return false;
-
-        return player.getClaimedDays().contains(day);
-    }
-
-    public GiftCalendar getPlugin() {
-        return plugin;
-    }
-
-    public void setPlugin(GiftCalendar plugin) {
-        this.plugin = plugin;
-    }
-
-    public List<PlayerModel> getPlayers() {
-        return players;
-    }
-
-    public void setPlayers(List<PlayerModel> players) {
-        this.players = players;
-    }
-
 }

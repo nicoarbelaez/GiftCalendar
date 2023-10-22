@@ -1,14 +1,15 @@
 package gc.nicoarbelaez.models;
 
 import java.util.List;
+import java.util.Map;
 
 public class PlayerModel {
     private String uuid;
-    private List<Integer> claimedDays;
+    private Map<String, List<Integer>> calendarRewardsRegister;
 
-    public PlayerModel(String uuid, List<Integer> claimedDays) {
+    public PlayerModel(String uuid, Map<String, List<Integer>> calendarRewardsRegister) {
         this.uuid = uuid;
-        this.claimedDays = claimedDays;
+        this.calendarRewardsRegister = calendarRewardsRegister;
     }
 
     public String getUuid() {
@@ -19,11 +20,13 @@ public class PlayerModel {
         this.uuid = uuid;
     }
 
-    public List<Integer> getClaimedDays() {
-        return claimedDays;
+    public Map<String, List<Integer>> getCalendarRewardsRegister() {
+        return calendarRewardsRegister;
     }
 
-    public void setClaimedDays(List<Integer> claimedDays) {
-        this.claimedDays = claimedDays;
+    public void setCalendarRewardsRegister(Map<String, List<Integer>> calendarRewardsRegister) {
+        this.calendarRewardsRegister = calendarRewardsRegister;
     }
+
+    
 }

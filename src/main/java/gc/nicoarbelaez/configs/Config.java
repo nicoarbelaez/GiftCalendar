@@ -1,75 +1,56 @@
 package gc.nicoarbelaez.configs;
 
-import java.util.logging.Logger;
-
 import org.bukkit.configuration.file.FileConfiguration;
 
 import gc.nicoarbelaez.GiftCalendar;
 import gc.nicoarbelaez.handlers.ConfigHandler;
 
 public abstract class Config {
-    private GiftCalendar plugin;
-    private ConfigHandler configFile;
-    private FileConfiguration config;
-    private String fileName;
+    private final GiftCalendar plugin;
+    private ConfigHandler configManager;
+    private FileConfiguration yamlFile;
+    private String yamlFileName;
 
-    public Config(GiftCalendar plugin, String fileName) {
+    public Config(GiftCalendar plugin) {
         this.plugin = plugin;
-        this.fileName = fileName;
+    }
+
+    public Config(GiftCalendar plugin, String yamlFileName) {
+        this.plugin = plugin;
+        this.yamlFileName = yamlFileName;
         registerConfig();
     }
 
     public abstract void load();
 
     public void registerConfig() {
-        configFile = new ConfigHandler(fileName, plugin);
-        configFile.registerConfig();
+        configManager = new ConfigHandler(yamlFileName, plugin);
+        configManager.registerConfig();
     }
 
     public void reloadConfig() {
-        configFile.reloadConfig();
+        configManager.reloadConfig();
         loadConfig();
         load();
     }
 
-    public Logger getLogger() {
-        return plugin.getLogger();
-    }
-
-    public void loadConfig(){
-        config = configFile.getConfig();
+    public void loadConfig() {
+        yamlFile = configManager.getConfig();
     }
 
     public GiftCalendar getPlugin() {
         return plugin;
     }
 
-    public void setPlugin(GiftCalendar plugin) {
-        this.plugin = plugin;
+    public ConfigHandler getConfigManager() {
+        return configManager;
     }
 
-    public ConfigHandler getConfigFile() {
-        return configFile;
+    public FileConfiguration getYamlFile() {
+        return yamlFile;
     }
 
-    public void setConfigFile(ConfigHandler configFile) {
-        this.configFile = configFile;
+    public String getYamlFileName() {
+        return yamlFileName;
     }
-
-    public FileConfiguration getConfig() {
-        return config;
-    }
-
-    public void setConfig(FileConfiguration config) {
-        this.config = config;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
 }

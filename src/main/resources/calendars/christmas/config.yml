@@ -1,0 +1,72 @@
+############################################################
+# +------------------------------------------------------+ #
+# |                     GiftCalendar                     | #
+# +------------------------------------------------------+ #
+# |                                                      | #
+# | Este es el archivo config.yml. Aquí se encuentra     | #
+# | toda la configuración relacionada con el calendario, | #
+# | sus propiedades y su comportamiento. Esta            | #
+# | configuración solo funcionará para el calendario     | #
+# | en el que se encuentra.                              | #
+# |                                                      | #
+# | ¿Cómo usar?                                          | #
+# | 1. Ajusta el título, tamaño y opciones del           | #
+# |    calendario según tus necesidades.                 | #
+# | 2. Define las recompensas diarias que los            | #
+# |    jugadores recibirán en "rewards".                 | #
+# | 3. ¡Personaliza tu calendario de regalos a medida!   | #
+# |                                                      | #
+############################################################
+
+# Este es el archivo de configuración para GiftCalendar v2.0.
+# Asegúrate de seguir las instrucciones en los comentarios para una configuración correcta.
+
+# Si necesitas ayuda con GiftCalendar, visita nuestro sitio web en https://discord.com/invite/FmaRPpcx7f
+
+############################################################
+# +------------------------------------------------------+ #
+# |             Configuración de calendario              | #
+# +------------------------------------------------------+ #
+############################################################
+calendar-config:
+  # Título del calendario.
+  # Placeholder:
+  #       %page% - Página actual del calendario. %pages% - Número total de páginas del calendario.
+  #       %day% - Día actual del calendario. %days% - Número total de días del calendario.
+  calendar-title: "&c&lCALENDARIO DE REGALOS &8(%page%/%pages%)"
+  # Tamaño del inventario. Solo multiplos de 9. Máximo 54.
+  size: 54
+  # Número de días en el calendario.
+  days: 30
+  # Slots que se usarán para las recompensas. Dejarlo vacio significa usar la configuración por defecto.
+  slots: []
+  # Mostrar el dia como cantidad del item.
+  show-day-as-amount: true
+  # Habilita o deshabilita la visualización de las recompensas en el inventario. Si está habilitado, las recompensas se mostrarán con otro item.
+  show-rewards-in-inventory: true
+  # Si se activa, sincroniza la contabilidad de días con las del servidor. Si se desactiva, puedes iniciar tu propia cantidad con un comando "/gc start [nameCalendar] [day]".
+  sync-with-server: true
+  # Si se activa, los jugadores recibirán una notificación cuando haya una nueva recompensa disponible al entrar al servidor.
+  notify-new-reward: true
+  # Si se activa, los jugadores podrán reclamar recompensas de días pasados.
+  claim-past-rewards: false
+  # Si se activa, los jugadores recibirán una recompensa especial al completar todas las recompensas de un mes.
+  complete-month-reward: true
+  # Define la recompensa que se dará al completar todas las recompensas de un calendario.
+  complete-calendar-reward-command:
+    - "give %player% elytra 1"
+    - "give %player% enchanted_golden_apple 2"
+  # Define la recompensa por defecto que recibirán los jugadores al reclamar una recompensa que no se haya asignado. Elimine o deje vacía esta opción para desactivarla.
+  default-reward-command:
+    - "exp give %player% 500"
+    - "eco give %player% 500"
+# Las recompensas por día. Puedes usar %player% para el jugador actual y %day% para el día actual.
+rewards:
+  "1":
+    - "give %player% apple %day%" # Da una manzana al jugador en el primer día.
+    - "exp give %player% 1000"
+    - "eco give %player% 1000"
+  "2":
+    - "give %player% apple 4-16" # Da entre 4 y 16 manzanas al jugador en el segundo día.
+  "8":
+    - "give %player% emerald 8"

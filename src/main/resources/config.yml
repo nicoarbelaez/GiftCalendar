@@ -1,64 +1,55 @@
-Config:
-  inventoryTitle: "&6&lCalendario &e%day%&r/&e%day:last% &l%month%"
+############################################################
+# +------------------------------------------------------+ #
+# |                     GiftCalendar                     | #
+# +------------------------------------------------------+ #
+# |                                                      | #
+# | Configuración de GiftCalendar, el plugin que te      | #
+# | permite ofrecer regalos diarios a tus jugadores.     | #
+# |                                                      | #
+# | ¿Cómo usar?                                          | #
+# | 1. Define los items para mostrar el estado de cada   | #
+# |    día y para navegar en el calendario.              | #
+# | 2. Agrega items extras para decorar el panel o       | #
+# |    proporcionar elementos únicos.                    | #
+# | 3. ¡Personaliza tu calendario de regalos a medida!   | #
+# |                                                      | #
+############################################################
 
-Rewards:
-  1:
-    - "give %player% apple %day%"
-  2:
-    - "give %player% apple %day%"
-  3:
-    - "give %player% emerald %day%"
-  4:
-    - "give %player% diamond %day%"
-  5:
-    - "give %player% diamond %day%"
-  6:
-    - "give %player% diamond %day%"
-  7:
-    - "give %player% diamond %day%"
-  8:
-    - "give %player% diamond %day%"
-  9:
-    - "give %player% diamond %day%"
-  10:
-    - "give %player% diamond %day%"
-  11:
-    - "give %player% apple %day%"
-  12:
-    - "give %player% apple %day%"
-  13:
-    - "give %player% emerald %day%"
-  14:
-    - "give %player% diamond %day%"
-  15:
-    - "give %player% diamond %day%"
-  16:
-    - "give %player% diamond %day%"
-  17:
-    - "give %player% diamond %day%"
-  18:
-    - "give %player% diamond %day%"
-  19:
-    - "give %player% diamond %day%"
-  20:
-    - "give %player% diamond %day%"
-  21:
-    - "give %player% apple %day%"
-  22:
-    - "give %player% apple %day%"
-  23:
-    - "give %player% emerald %day%"
-  24:
-    - "give %player% diamond %day%"
-  25:
-    - "give %player% diamond %day%"
-  26:
-    - "give %player% diamond %day%"
-  27:
-    - "give %player% diamond %day%"
-  28:
-    - "give %player% diamond %day%"
-  29:
-    - "give %player% diamond %day%"
-  30:
-    - "give %player% diamond %day%"
+# Este es el archivo de configuración para GiftCalendar v2.0.
+# Asegúrate de seguir las instrucciones en los comentarios para una configuración correcta.
+
+# Si necesitas ayuda con GiftCalendar, visita nuestro sitio web en https://discord.com/invite/FmaRPpcx7f
+
+############################################################
+# +------------------------------------------------------+ #
+# |                     Configuración                    | #
+# +------------------------------------------------------+ #
+############################################################
+#    ____ _  __ _    ____      _                _
+#   / ___(_)/ _| |_ / ___|__ _| | ___ _ __   __| | __ _ _ __
+#  | |  _| | |_| __| |   / _` | |/ _ \ '_ \ / _` |/ _` | '__|
+#  | |_| | |  _| |_| |__| (_| | |  __/ | | | (_| | (_| | |
+#   \____|_|_|  \__|\____\__,_|_|\___|_| |_|\__,_|\__,_|_|
+#   ______ _  ___      ______      _                 _
+#  / _____|_)/ __)_   / _____)    | |               | |
+# | /  ___ _| |__| |_| /      ____| | ____ ____   _ | | ____  ____
+# | | (___) |  __)  _) |     / _  | |/ _  )  _ \ / || |/ _  |/ ___)
+# | \____/| | |  | |_| \____( ( | | ( (/ /| | | ( (_| ( ( | | |
+#  \_____/|_|_|   \___)______)_||_|_|\____)_| |_|\____|\_||_|_|
+#     ___ _  __ _    ___      _             _
+#   / __(_)/ _| |_ / __|__ _| |___ _ _  __| |__ _ _ _
+#  | (_ | |  _|  _| (__/ _` | / -_) ' \/ _` / _` | '_|
+#   \___|_|_|  \__|\___\__,_|_\___|_||_\__,_\__,_|_|
+#      _____ _  __ _    _____      _                _
+#   / ____(_)/ _| |  / ____|    | |              | |
+#  | |  __ _| |_| |_| |     __ _| | ___ _ __   __| | __ _ _ __
+#  | | |_ | |  _| __| |    / _` | |/ _ \ '_ \ / _` |/ _` | '__|
+#  | |__| | | | | |_| |___| (_| | |  __/ | | | (_| | (_| | |
+#   \_____|_|_|  \__|\_____\__,_|_|\___|_| |_|\__,_|\__,_|_|
+
+# https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
+# https://code2care.org/pages/java-timezone-list-utc-gmt-offset#timezones_africa_cities
+# https://www.timeanddate.com/time/zones/
+config:
+  time-zone: ""
+# time-zone: "America/Argentina/Buenos_Aires"

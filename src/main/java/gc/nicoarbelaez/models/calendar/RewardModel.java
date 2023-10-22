@@ -1,4 +1,4 @@
-package gc.nicoarbelaez.models;
+package gc.nicoarbelaez.models.calendar;
 
 import java.util.List;
 

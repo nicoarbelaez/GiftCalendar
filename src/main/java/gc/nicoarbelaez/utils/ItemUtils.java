@@ -1,6 +1,7 @@
 package gc.nicoarbelaez.utils;
 
 import java.lang.reflect.Field;
+import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
 
@@ -15,7 +16,7 @@ import org.bukkit.inventory.meta.SkullMeta;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 
-import gc.nicoarbelaez.models.CustomItemModel;
+import gc.nicoarbelaez.models.calendar.ItemModel;
 
 public class ItemUtils {
 
@@ -49,7 +50,8 @@ public class ItemUtils {
         return itemStack;
     }
 
-    public static void setSkullData(ItemStack item, String value) {
+    @SuppressWarnings("deprecation")
+    public static void setSkullData(ItemStack item, String value, String owner) {
         String itemType = item.getType().name();
 
         if (!itemType.equals("PLAYER_HEAD") && !itemType.equals("SKULL_ITEM")) {
@@ -57,6 +59,11 @@ public class ItemUtils {
         }
 
         SkullMeta skullMeta = (SkullMeta) item.getItemMeta();
+        if (owner != null) {
+            skullMeta.setOwner(owner);
+            item.setItemMeta(skullMeta);
+            return;
+        }
         GameProfile profile = new GameProfile(UUID.randomUUID(), null);
 
         if (value != null) {
@@ -74,30 +81,37 @@ public class ItemUtils {
 
         item.setItemMeta(skullMeta);
     }
+    
 
-    public static ItemStack createItemFromProperties(CustomItemModel customItem) {
-        ItemStack item = createItemFromId(customItem.getMaterial());
+    public static ItemStack createItemFromModel(ItemModel itemModel) {
+        String material = itemModel.getMaterial();
+        String value = itemModel.getValue();
+        String owner = itemModel.getOwner();
+        String name = TextUtils.formatText(itemModel.getName());
+        List<String> lore = TextUtils.formatText(itemModel.getLore());
+        int ammount = itemModel.getAmmount();
+        boolean glow = itemModel.isGlow();
+
+        ItemStack item = createItemFromId(material);
         if (item == null) {
-            return null;
+            return new ItemStack(Material.STONE);
         }
 
         // Item
-        item.setAmount(customItem.getAmmount());
+        item.setAmount(ammount);
 
         // Meta
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(customItem.getName());
-        meta.setLore(customItem.getLore());
-        if (customItem.isGlow()) {
+        meta.setDisplayName(name);
+        meta.setLore(lore);
+        if (glow) {
             meta.addEnchant(Enchantment.DURABILITY, 1, true);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
         item.setItemMeta(meta);
 
         // Meta skull
-        if (customItem.getValue() != null) {
-            setSkullData(item, customItem.getValue());
-        }
+        ItemUtils.setSkullData(item, value, owner);
 
         return item;
     }

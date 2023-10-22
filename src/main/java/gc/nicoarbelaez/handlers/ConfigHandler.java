@@ -1,77 +1,102 @@
 package gc.nicoarbelaez.handlers;
 
 import gc.nicoarbelaez.GiftCalendar;
+
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import java.io.InputStreamReader;
+
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 
 public class ConfigHandler {
-
-    private String fileName;
-    private FileConfiguration fileConfig = null;
-    private File file = null;
     private GiftCalendar plugin;
+    private FileConfiguration fileConfigDefault;
+    private File file;
+    private String fileName;
+    private String pathFile;
     private boolean firstTime;
 
     public ConfigHandler(String fileName, GiftCalendar plugin) {
         this.fileName = fileName;
         this.plugin = plugin;
-        this.firstTime = false;
+        this.firstTime = true;
+    }
+
+    public ConfigHandler(String pathFile, String fileName, GiftCalendar plugin) {
+        this.pathFile = pathFile;
+        this.fileName = fileName;
+        this.plugin = plugin;
+        this.firstTime = true;
     }
 
     /**
-     * Register the config
+     * Register the configuration file.
      */
     public void registerConfig() {
-        file = new File(plugin.getDataFolder(), fileName);
+        if (pathFile == null) {
+            file = new File(plugin.getDataFolder(), fileName);
+        } else {
+            file = new File(plugin.getDataFolder() + File.separator + pathFile, fileName);
+        }
+
         if (!file.exists()) {
-            firstTime = true;
             this.getConfig().options().copyDefaults(true);
             saveConfig();
+            firstTime = false;
         }
+        firstTime = false;
     }
 
     /**
-     * Save the config
+     * Get the configuration file.
+     *
+     * @return FileConfiguration
+     */
+    public FileConfiguration getConfig() {
+        if (fileConfigDefault == null) {
+            reloadConfig();
+        }
+        return fileConfigDefault;
+    }
+
+    /**
+     * Save the configuration file.
      */
     public void saveConfig() {
         try {
-            fileConfig.save(file);
+            fileConfigDefault.save(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * @return the fileConfig
-     */
-    public FileConfiguration getConfig() {
-        if (fileConfig == null) {
-            reloadConfig();
-        }
-        return fileConfig;
-    }
-
-    /**
-     * Reload the config
+     * Reload the configuration file.
      */
     public void reloadConfig() {
-        if (fileConfig == null) {
-            file = new File(plugin.getDataFolder(), fileName);
+        if (fileConfigDefault == null) {
+            if (pathFile == null) {
+                file = new File(plugin.getDataFolder(), fileName);
+            } else {
+                file = new File(plugin.getDataFolder() + File.separator + pathFile, fileName);
+            }
         }
-        fileConfig = YamlConfiguration.loadConfiguration(file);
+        fileConfigDefault = YamlConfiguration.loadConfiguration(file);
 
         if (firstTime) {
             Reader defConfigStream;
             try {
-                defConfigStream = new InputStreamReader(plugin.getResource(fileName), "UTF8");
+                if (pathFile == null) {
+                    defConfigStream = new InputStreamReader(plugin.getResource(fileName), "UTF8");
+                } else {
+                    defConfigStream = new InputStreamReader(plugin.getResource(pathFile + "/" + fileName), "UTF8");
+                }
                 if (defConfigStream != null) {
                     YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-                    fileConfig.setDefaults(defConfig);
+                    fileConfigDefault.setDefaults(defConfig);
                 }
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();

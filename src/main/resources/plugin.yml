@@ -7,6 +7,9 @@ softdepend: [Vault]
 depend: [NBTAPI]
 
 commands:
-  calendar:
+  giftcalendar:
     description: Main command GiftCalendar
-    aliases: gc
+    aliases:
+      - giftc
+      - gc
+      - calendar
